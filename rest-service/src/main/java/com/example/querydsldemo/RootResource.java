@@ -1,6 +1,7 @@
 package com.example.querydsldemo;
 
 import com.example.querydsldemo.artist.ArtistResource;
+import com.example.querydsldemo.film.FilmResource;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +19,8 @@ public class RootResource {
         return ArtistResource.class;
     }
     
+    @Path("/film")
+    public Class<FilmResource> film() {
+        return FilmResource.class;
+    }
 }

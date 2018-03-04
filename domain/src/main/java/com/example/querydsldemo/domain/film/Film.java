@@ -2,6 +2,12 @@ package com.example.querydsldemo.domain.film;
 
 import com.example.querydsldemo.domain.BaseEntity;
 import com.example.querydsldemo.domain.artist.Artist;
+import com.example.querydsldemo.domain.artist.converter.ArtistToLongConverter;
+import com.example.querydsldemo.domain.artist.converter.LongToArtistConverter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,6 +21,10 @@ public class Film extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "director_id")
+    @JsonProperty("directorId")
+    @JsonDeserialize(converter = LongToArtistConverter.class)
+    @JsonSerialize(converter = ArtistToLongConverter.class)
+    @ApiModelProperty(name = "directorId", dataType = "int")
     private Artist director;
 
     public String getTitle() {
