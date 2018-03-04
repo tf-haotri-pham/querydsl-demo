@@ -18,8 +18,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -48,11 +48,13 @@ public class FilmResource {
     }
 
     @GET
-    @ApiOperation("searches for films by director")
-    public List<Film> searchFilmByDirectorName(@QueryParam("director-name") final String directorName) {
+    @ApiOperation(value = "searches for films by director", response = Films.class)
+    public Iterable<Film> searchFilmByDirectorName(@QueryParam("director-name") final String directorName) {
         return StringUtils.isBlank(directorName)
                 ? Collections.emptyList()
-                : filmRepository.findByDirectorName(directorName);
+                : filmRepository.findByDirectorName(directorName); // TODO: use QueryDSL
     }
-    
+
+    interface Films extends Collection<Film> {
+    }
 }
