@@ -38,6 +38,11 @@
             <!-- Spring Boot starters -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jersey</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
@@ -63,6 +68,12 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-core</artifactId>
                 <version>${flyway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-jersey2-jaxrs</artifactId>
+                <version>1.5.18</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
