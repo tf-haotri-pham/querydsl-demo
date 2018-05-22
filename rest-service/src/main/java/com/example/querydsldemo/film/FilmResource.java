@@ -19,6 +19,7 @@ import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -54,17 +55,26 @@ public class FilmResource {
         return filmRepository.save(film);
     }
 
+    @PUT
+    @Path("/{filmId}")
+    @ApiOperation("modifies a film")
+    public Film modifyFilm(final Film film, @PathParam("filmId") final long filmId) {
+        film.setId(filmId);
+        return filmRepository.save(film);
+    }
+
     @GET
     @ApiOperation(value = "searches for films by director", response = Films.class)
     public Iterable<Film> searchFilmByDirectorName(@QueryParam("director-name") final String directorName) {
         return StringUtils.isBlank(directorName)
                 ? Collections.emptyList()
-                : filmRepository.findByDirectorName(directorName); // TODO: use QueryDSL
+                : filmRepository.findAll(QFilm.film.director.firstName.containsIgnoreCase(directorName)
+                .or(QFilm.film.director.lastName.containsIgnoreCase(directorName)));
     }
 
     @GET
     @Path("/search")
-    @ApiOperation("searches for films by director")
+    @ApiOperation("searches for films by multiple criteria")
     public Page<Film> searchFilm(@QueryParam("title") final String title,
                                  @QueryParam("release-year") final Integer releaseYear,
                                  @QueryParam("release-year-matching") final DateMatching releaseYearMatching,

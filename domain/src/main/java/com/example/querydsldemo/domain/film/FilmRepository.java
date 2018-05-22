@@ -10,8 +10,4 @@ import java.util.List;
 
 @Repository
 public interface FilmRepository extends BaseEntityRepository<Film>, QueryDslPredicateExecutor<Film> {
-
-    @Query("select f from Film f where f.director.firstName like %:name% OR f.director.lastName like %:name%")
-    List<Film> findByDirectorName(@Param("name") String name);
-    
 }

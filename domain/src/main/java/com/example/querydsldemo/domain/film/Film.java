@@ -26,6 +26,8 @@ public class Film extends BaseEntity {
     @JsonSerialize(converter = ArtistToLongConverter.class)
     @ApiModelProperty(name = "directorId", dataType = "int")
     private Artist director;
+    
+    private String originalLanguage;
 
     public String getTitle() {
         return title;
@@ -49,5 +51,13 @@ public class Film extends BaseEntity {
 
     public void setDirector(final Artist director) {
         this.director = director;
+    }
+
+    public String getOriginalLanguage() {
+        return originalLanguage;
+    }
+
+    public void setOriginalLanguage(final String originalLanguage) {
+        this.originalLanguage = originalLanguage;
     }
 }
