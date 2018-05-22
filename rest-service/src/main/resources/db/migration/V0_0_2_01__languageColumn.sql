@@ -1,0 +1,1 @@
+ALTER TABLE ${schema}.film ADD COLUMN original_language VARCHAR(32);
