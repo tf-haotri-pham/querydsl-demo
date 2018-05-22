@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Locale;
 
 @Entity
 public class Film extends BaseEntity {
@@ -27,7 +28,8 @@ public class Film extends BaseEntity {
     @ApiModelProperty(name = "directorId", dataType = "int")
     private Artist director;
     
-    private String originalLanguage;
+    @ApiModelProperty(dataType = "String")
+    private Locale originalLanguage;
 
     public String getTitle() {
         return title;
@@ -53,11 +55,11 @@ public class Film extends BaseEntity {
         this.director = director;
     }
 
-    public String getOriginalLanguage() {
+    public Locale getOriginalLanguage() {
         return originalLanguage;
     }
 
-    public void setOriginalLanguage(final String originalLanguage) {
+    public void setOriginalLanguage(final Locale originalLanguage) {
         this.originalLanguage = originalLanguage;
     }
 }
